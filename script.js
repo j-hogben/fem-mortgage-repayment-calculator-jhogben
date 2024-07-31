@@ -1,6 +1,46 @@
 const calculatorForm = document.querySelector("#mortgage-calculator");
 
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ RESET FORM BUTTON ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+const resetForm = () => calculatorForm.reset();
+
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FORMAT NUMBERS ON INPUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+// WAIT FOR PAGE TO FULLY LOAD BEFORE EXECUTING INTERNAL FUNCTION
+document.addEventListener("DOMContentLoaded", () => {
+  const numbersToFormat = calculatorForm.querySelectorAll(".format-input");
+
+  /* FOR EACH INPUT TO FORMAT, WHENEVER THE INPUT VALUE CHANGES, 
+  ALL NON-NUMERICAL VALUES ARE REPLACED WITH EMPTY CHARACTERS. */
+  numbersToFormat.forEach((number) => {
+    number.addEventListener("input", (event) => {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, "");
+
+      /* IF A VALUE IS PRESENT, THAT VALUE IS FORMATTED WITH THE BASIC 
+      NUMBERFORMAT() */
+      if (value) {
+        value = new Intl.NumberFormat().format(value);
+      } else {
+        value = "";
+      }
+
+      // THAT VALUE (NOW FORMATTED) IS THEN ASSIGNED TO THE INPUT VALUE
+      input.value = value;
+    });
+  });
+});
+
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+
+// ~ ~ ~ ~ ~ ~ ~ SELECT FIRST RADIO BUTTON ON NAVIGATION ~ ~ ~ ~ ~ ~ ~
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
