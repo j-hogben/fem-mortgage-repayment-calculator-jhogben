@@ -6,3 +6,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* FORM INPUT STYLING */
+  .text-input-default,
+  .radio-input-default {
+    @apply border-slate500 text-preset3/preset3 text-slate900 overflow-hidden rounded border font-bold;
+  }
+
+  .text-input-default input,
+  .radio-input-default {
+    @apply py-175 px-200 cursor-pointer outline-none;
+  }
+
+  .input-unit {
+    @apply bg-slate100 py-175 px-200;
+  }
+
+  .error {
+    @apply text-errorRed;
+  }
+
+  /* FORM INPUT ACTIVE STATES */
+  .text-input-default:hover {
+    @apply border-slate900;
+  }
+
+  .radio-input-default:hover {
+    @apply border-limeBright;
+  }
+
+  .radio-input-default:has(input[type="radio"]:checked) {
+    @apply bg-limePale border-limeBright;
+  }
+
+  /* FORM INPUT BYPASS AUTOCOMPLETE DEFAULT STYLING */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+  }
+}

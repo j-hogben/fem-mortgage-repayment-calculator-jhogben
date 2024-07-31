@@ -21,7 +21,7 @@
       <!-- CARD -->
       <div class="card">
         <!-- FORM SIDE OF CARD -->
-        <section class="left">
+        <section class="px-300 py-400 bg-white">
           <form action="">
             <div class="flex justify-between">
               <h1>Mortgage Calculator</h1>
@@ -31,9 +31,10 @@
             <!-- FORM GROUP 1 - MORTGAGE AMOUNT -->
             <div class="form-group">
               <label for="mortgage-amount">Mortgage Amount</label>
-              <div class="input-container flex border">
+              <div class="input-container text-input-default flex">
                 <p class="input-unit">£</p>
                 <input
+                  required
                   type="text"
                   inputmode="numeric"
                   name="mortgage-amount"
@@ -47,8 +48,9 @@
             <!-- FORM GROUP 2 - MORTGAGE TERM -->
             <div class="form-group">
               <label for="mortgage-term">Mortgage Term</label>
-              <div class="input-container flex border">
+              <div class="input-container text-input-default flex">
                 <input
+                  required
                   type="text"
                   inputmode="numeric"
                   name="mortgage-term"
@@ -63,8 +65,9 @@
             <!-- FORM GROUP 3 - INTEREST RATE -->
             <div class="form-group">
               <label for="interest-rate">Interest Rate</label>
-              <div class="input-container flex border">
+              <div class="input-container text-input-default flex">
                 <input
+                  required
                   type="text"
                   inputmode="numeric"
                   name="interest-rate"
@@ -81,8 +84,9 @@
               <p>Mortgage Type</p>
 
               <div class="input-container mortgage-type">
-                <label for="repayment" class="flex border">
+                <label for="repayment" class="radio-input-default flex">
                   <input
+                    required
                     type="radio"
                     name="mortgage-type"
                     id="repayment"
@@ -91,8 +95,9 @@
                   <p>Repayment</p>
                 </label>
 
-                <label for="interest-only" class="flex border">
+                <label for="interest-only" class="radio-input-default flex">
                   <input
+                    required
                     type="radio"
                     name="mortgage-type"
                     id="interest-only"
@@ -113,9 +118,9 @@
         </section>
 
         <!-- RESULTS SIDE OF CARD -->
-        <section>
+        <section class="px-300 py-400 bg-slate900 text-white">
           <!-- EMPTY RESULTS -->
-          <div class="empty">
+          <div class="hidden">
             <div>
               <img src="./assets/images/illustration-empty.svg" alt="" />
               <h2>Results shown here</h2>
@@ -134,14 +139,24 @@
               provided. To adjust the results, edit the form and click
               “calculate repayments” again.
             </p>
-            <div>
-              <div>
+            <div
+              class="bg-overlay py-300 px-200 border-limeBright rounded-lg border-t-4"
+            >
+              <div class="border-bluePale border-b">
                 <p>Your monthly repayments</p>
-                <p class="monthly-repayments"></p>
+                <p
+                  class="monthly-repayments mt-100 mb-200 text-preset1mob/preset1 text-limeBright font-bold"
+                >
+                  £1,797.74
+                </p>
               </div>
               <div>
-                <p>Total you'll repay over the term</p>
-                <p class="total-repayment"></p>
+                <p class="mt-200">Total you'll repay over the term</p>
+                <p
+                  class="total-repayment text-preset2/preset2 leading-preset2 mt-100 font-bold"
+                >
+                  £539,322.94
+                </p>
               </div>
             </div>
           </div>
