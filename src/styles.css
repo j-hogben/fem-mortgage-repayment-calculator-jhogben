@@ -23,13 +23,17 @@
     @apply bg-slate100 py-175 px-200;
   }
 
-  .error {
-    @apply text-errorRed;
-  }
-
   /* FORM INPUT ACTIVE STATES */
   .text-input-default:hover {
     @apply border-slate900;
+  }
+
+  .text-input-default:focus-within {
+    @apply border-limeBright;
+  }
+
+  .form-group:has(.text-input-default:focus-within) .input-unit {
+    @apply bg-limeBright;
   }
 
   .radio-input-default:hover {
@@ -38,6 +42,19 @@
 
   .radio-input-default:has(input[type="radio"]:checked) {
     @apply bg-limePale border-limeBright;
+  }
+
+  /* FORM ERROR STATES */
+  .error {
+    @apply text-errorRed;
+  }
+
+  .text-input-default-error {
+    @apply !border-errorRed;
+  }
+
+  .input-unit-error {
+    @apply bg-errorRed text-white;
   }
 
   /* FORM INPUT BYPASS AUTOCOMPLETE DEFAULT STYLING */
