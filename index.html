@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./dist/styles.css" />
+
+    <title>Frontend Mentor | Mortgage repayment calculator</title>
+  </head>
+  <body class="font-body">
+    <main>
+      <!-- CARD -->
+      <div class="card">
+        <!-- FORM SIDE OF CARD -->
+        <section class="left">
+          <form action="">
+            <div class="flex justify-between">
+              <h1>Mortgage Calculator</h1>
+              <button>Clear All</button>
+            </div>
+
+            <!-- FORM GROUP 1 - MORTGAGE AMOUNT -->
+            <div class="form-group">
+              <label for="mortgage-amount">Mortgage Amount</label>
+              <div class="input-container flex border">
+                <p class="input-unit">£</p>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  name="mortgage-amount"
+                  id="mortgage-amount"
+                  class="w-full"
+                />
+              </div>
+              <div class="error">This field is required</div>
+            </div>
+
+            <!-- FORM GROUP 2 - MORTGAGE TERM -->
+            <div class="form-group">
+              <label for="mortgage-term">Mortgage Term</label>
+              <div class="input-container flex border">
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  name="mortgage-term"
+                  id="mortgage-term"
+                  class="w-full"
+                />
+                <p class="input-unit">years</p>
+              </div>
+              <div class="error">This field is required</div>
+            </div>
+
+            <!-- FORM GROUP 3 - INTEREST RATE -->
+            <div class="form-group">
+              <label for="interest-rate">Interest Rate</label>
+              <div class="input-container flex border">
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  name="interest-rate"
+                  id="interest-rate"
+                  class="w-full"
+                />
+                <p class="input-unit">%</p>
+              </div>
+              <div class="error">This field is required</div>
+            </div>
+
+            <!-- FORM GROUP 4 - MORTGAGE TYPE -->
+            <div class="form-group">
+              <p>Mortgage Type</p>
+
+              <div class="input-container mortgage-type">
+                <label for="repayment" class="flex border">
+                  <input
+                    type="radio"
+                    name="mortgage-type"
+                    id="repayment"
+                    value="repayment"
+                  />
+                  <p>Repayment</p>
+                </label>
+
+                <label for="interest-only" class="flex border">
+                  <input
+                    type="radio"
+                    name="mortgage-type"
+                    id="interest-only"
+                    value="interest-only"
+                  />
+                  <p>Interest Only</p>
+                </label>
+
+                <div class="error">This field is required</div>
+              </div>
+            </div>
+
+            <button type="submit" class="flex">
+              <img src="./assets/images/icon-calculator.svg" alt="" />
+              <p>Calculate Repayments</p>
+            </button>
+          </form>
+        </section>
+
+        <!-- RESULTS SIDE OF CARD -->
+        <section>
+          <!-- EMPTY RESULTS -->
+          <div class="empty">
+            <div>
+              <img src="./assets/images/illustration-empty.svg" alt="" />
+              <h2>Results shown here</h2>
+              <p>
+                Complete the form and click “calculate repayments” to see what
+                your monthly repayments would be.
+              </p>
+            </div>
+          </div>
+
+          <!-- COMPLETED RESULTS -->
+          <div>
+            <h2>Your results</h2>
+            <p>
+              Your results are shown below based on the information you
+              provided. To adjust the results, edit the form and click
+              “calculate repayments” again.
+            </p>
+            <div>
+              <div>
+                <p>Your monthly repayments</p>
+                <p class="monthly-repayments"></p>
+              </div>
+              <div>
+                <p>Total you'll repay over the term</p>
+                <p class="total-repayment"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
