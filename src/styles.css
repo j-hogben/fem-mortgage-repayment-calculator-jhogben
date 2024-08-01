@@ -40,6 +40,10 @@
     @apply border-limeBright;
   }
 
+  .radio-input-default:focus-within input {
+    @apply outline-none;
+  }
+
   .radio-input-default:has(input[type="radio"]:checked) {
     @apply bg-limePale border-limeBright;
   }

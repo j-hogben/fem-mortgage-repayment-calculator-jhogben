@@ -1,3 +1,5 @@
+const { doc } = require("prettier");
+
 const calculatorForm = document.querySelector("#mortgage-calculator");
 
 // //////////////////////////////////////////////////////////////////////////////
@@ -5,7 +7,8 @@ const calculatorForm = document.querySelector("#mortgage-calculator");
 
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ RESET FORM BUTTON ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-const resetForm = () => calculatorForm.reset();
+// THIS FUNCTION IS ABRIGATED BY HTML BUTTON TYPE RESET
+// const resetForm = () => calculatorForm.reset();
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
@@ -41,6 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
 // //////////////////////////////////////////////////////////////////////////////
 
 // ~ ~ ~ ~ ~ ~ ~ SELECT FIRST RADIO BUTTON ON NAVIGATION ~ ~ ~ ~ ~ ~ ~
+
+document.addEventListener("DOMContentLoaded", () => {
+  // MAKE NODELIST OF ALL RADIO GROUPS
+  const radioGroups = document.querySelectorAll(".radio-group");
+  /* FOR EACH RADIO GROUP, MAKE A NODELIST OF ALL RADIO BUTTONS WITHIN.
+  WHEN FOCUSING IN THE GROUP, IF NO RADIO BUTTON IS CHECKED, CHECK THE 
+  FIRST ONE AUTOMATICALLY */
+  radioGroups.forEach((group) => {
+    const radios = group.querySelectorAll('input[type="radio"]');
+    group.addEventListener("focusin", () => {
+      if (!Array.from(radios).some((radio) => radio.checked)) {
+        radios[0].checked = true;
+      }
+    });
+  });
+});
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
@@ -123,7 +142,7 @@ const validateForm = (formSelector) => {
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
 
-// ~ ~ ~ ~ ~ ~ ~ ~ ~ RUN VALIDATION ON FORM SUBMIT ~ ~ ~ ~ ~ ~ ~ ~ ~
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ON FORM SUBMIT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 calculatorForm.addEventListener("submit", (event) => {
   event.preventDefault();
