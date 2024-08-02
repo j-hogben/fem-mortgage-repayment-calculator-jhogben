@@ -1,44 +1,97 @@
-const { doc } = require("prettier");
+// const { doc } = require("prettier");
 
 const calculatorForm = document.querySelector("#mortgage-calculator");
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
 
-// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ RESET FORM BUTTON ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ MORTGAGE CALCULATOR FUNCTION ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-// THIS FUNCTION IS ABRIGATED BY HTML BUTTON TYPE RESET
-// const resetForm = () => calculatorForm.reset();
+const calculateMortgage = () => {
+  // REMOVE COMMA SEPARATORS FROM INCOMING INPUT VALUES
+  const mortgageAmount = parseFloat(
+    calculatorForm.querySelector("#mortgage-amount").value.replace(/,/g, ""),
+  );
+  const mortgageTerm = parseFloat(
+    calculatorForm.querySelector("#mortgage-term").value.replace(/,/g, ""),
+  );
+  const interestRate = parseFloat(
+    calculatorForm.querySelector("#interest-rate").value.replace(/,/g, ""),
+  );
+  const mortgageType = calculatorForm.querySelector(
+    'input[name="mortgage-type"]:checked',
+  ).value;
+  //
+  const monthlyRepaymentResult = document.querySelector("#monthly-repayments");
+  const totalRepaymentResult = document.querySelector("#total-repayment");
+  const P = mortgageAmount; /* principal mortgage amount */
+  const r = interestRate / 100 / 12; /* monthly interest rate */
+  const n = mortgageTerm * 12; /* number of repayments */
 
-// //////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////
+  const repaymentMortgage = () => {
+    // CALCULATION:
+    // M = P * (r * ((1+r) to the power of n)) / (((1+r) to the power of n) -1);
 
-// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FORMAT NUMBERS ON INPUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    // MONTHLY REPAYMENT
+    const monthlyRepayment =
+      P * ((r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
 
-// WAIT FOR PAGE TO FULLY LOAD BEFORE EXECUTING INTERNAL FUNCTION
-document.addEventListener("DOMContentLoaded", () => {
-  const numbersToFormat = calculatorForm.querySelectorAll(".format-input");
+    // TOTAL REPAYMENT
+    const totalRepayment = monthlyRepayment * n;
 
-  /* FOR EACH INPUT TO FORMAT, WHENEVER THE INPUT VALUE CHANGES, 
-  ALL NON-NUMERICAL VALUES ARE REPLACED WITH EMPTY CHARACTERS. */
-  numbersToFormat.forEach((number) => {
-    number.addEventListener("input", (event) => {
-      let input = event.target;
-      let value = input.value.replace(/\D/g, "");
+    // RETURN OBJECT WITH MONTHLY AND TOTAL REPAYMENT AMOUNTS
+    return {
+      monthly: monthlyRepayment,
+      total: totalRepayment,
+    };
+  };
 
-      /* IF A VALUE IS PRESENT, THAT VALUE IS FORMATTED WITH THE BASIC 
-      NUMBERFORMAT() */
-      if (value) {
-        value = new Intl.NumberFormat().format(value);
-      } else {
-        value = "";
-      }
+  const interestOnlyMortgage = () => {
+    // CALCULATION:
+    // M = P * r;
 
-      // THAT VALUE (NOW FORMATTED) IS THEN ASSIGNED TO THE INPUT VALUE
-      input.value = value;
-    });
-  });
-});
+    // MONTHLY REPAYMENT
+    const monthlyRepayment = P * r;
+
+    // TOTAL REPAYMENT
+    const totalRepayment = monthlyRepayment * n;
+
+    return {
+      monthly: monthlyRepayment,
+      total: totalRepayment,
+    };
+  };
+
+  // FORMAT REPAYMENT CURRENCY AMOUNTS
+  const formatCurrency = (value) => {
+    // ROUND VALUE TO 2 DECIMAL PLACES
+    value = value.toFixed(2);
+    /* IF AFTER ROUNDING, THE VALUE IS AN INTEGER (OR ENDS .00), 
+    REMOVE ANY DECIMAL AND ANY SUBSEQUENT ZEROS */
+    const isInteger = value % 1 === 0;
+    return `£${new Intl.NumberFormat("en-GB", {
+      minimumFractionDigits: isInteger ? 0 : 2,
+      maximumFractionDigits: isInteger ? 0 : 2,
+    }).format(value)}`;
+  };
+
+  // UPDATE HTML RESULTS TEXT CONTENT
+  if (!mortgageType) {
+    console.log("No mortgage type selected");
+  } else if (mortgageType === "repayment") {
+    const repaymentResult = repaymentMortgage();
+    monthlyRepaymentResult.textContent = formatCurrency(
+      repaymentResult.monthly,
+    );
+    totalRepaymentResult.textContent = formatCurrency(repaymentResult.total);
+  } else if (mortgageType === "interest-only") {
+    const interestOnlyResult = interestOnlyMortgage();
+    monthlyRepaymentResult.textContent = formatCurrency(
+      interestOnlyResult.monthly,
+    );
+    totalRepaymentResult.textContent = formatCurrency(interestOnlyResult.total);
+  }
+};
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
@@ -64,6 +117,58 @@ document.addEventListener("DOMContentLoaded", () => {
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FORMAT NUMBERS ON INPUT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+document.addEventListener("DOMContentLoaded", () => {
+  const numbersToFormat = calculatorForm.querySelectorAll(".format-input");
+
+  /* ON INPUT, FORMAT FIELD VALUE BY REMOVING ANY CHARACTER OTHER THAN DIGITS 
+  AND ONE DECIMAL POINT */
+  numbersToFormat.forEach((number) => {
+    number.addEventListener("input", (event) => {
+      let input = event.target;
+      let value = input.value.replace(/[^\d.]/g, "");
+
+      // MATCH ADDS ALL (IN THIS CASE DECIMAL POINTS) TO AN ARRAY
+      let decimalCount = (value.match(/\./g) || []).length;
+      /* THEN IF THAT ARRAY HAS A LENGTH OF MORE THAN ONE, REMOVES SUBSEQUENT 
+      DECIMAL POINTS ON INPUT */
+      if (decimalCount > 1) {
+        value = value.replace(/\./, "x").replace(/\./g, "").replace(/x/, ".");
+      }
+
+      input.value = value;
+    });
+
+    /* WHEN INPUT IS NO LONGER IN FOCUS, UPDATE FORMATTING TO 2 DECIMAL PLACES*/
+    number.addEventListener("blur", (event) => {
+      let input = event.target;
+      let value = input.value;
+
+      if (value) {
+        let numValue = parseFloat(value);
+        if (!isNaN(numValue)) {
+          if (!Number.isInteger(numValue)) {
+            value = numValue.toLocaleString("en-GB", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
+          } else {
+            value = numValue.toLocaleString();
+          }
+        }
+      } else {
+        value = "";
+      }
+
+      input.value = value;
+    });
+  });
+});
+
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CUSTOM FORM VALIDATION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 // IGNORE HTML VALIDATION IF JAVASCRIPT IS ENABLED
@@ -71,6 +176,9 @@ calculatorForm.setAttribute("novalidate", "");
 
 // VALIDATE FORM FUNCTION
 const validateForm = (formSelector) => {
+  // TOTAL FORM ERROR COUNT
+  let formErrorCount = 0;
+
   // INPUT VALIDATION OPTIONS
   const validationOptions = [
     {
@@ -103,16 +211,17 @@ const validateForm = (formSelector) => {
       if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
         errorContainer.textContent = option.errorMessage;
         formGroupError = true;
-        if (input.type !== "radio" || input.type !== "checkbox") {
+        if (input.type !== "radio" && input.type !== "checkbox") {
           inputContainer.classList.add("text-input-default-error");
           inputUnit.classList.add("input-unit-error");
+          formErrorCount++;
         }
       }
     }
 
     if (!formGroupError) {
       errorContainer.textContent = "";
-      if (input.type !== "radio" || input.type !== "checkbox") {
+      if (input.type !== "radio" && input.type !== "checkbox") {
         inputContainer.classList.remove("text-input-default-error");
         inputUnit.classList.remove("input-unit-error");
       }
@@ -132,12 +241,9 @@ const validateForm = (formSelector) => {
 
   // RUN VALIDATION FUNCTION
   validateAllFormGroups(formSelector);
+
+  return formErrorCount === 0;
 };
-
-// //////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////
-
-// ~ ~ ~ ~ ~ ~ ~ ~ ~ MORTGAGE CALCULATOR FUNCTION ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
@@ -146,5 +252,7 @@ const validateForm = (formSelector) => {
 
 calculatorForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  validateForm(calculatorForm);
+  if (validateForm(calculatorForm)) {
+    calculateMortgage();
+  }
 });
