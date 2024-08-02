@@ -3,12 +3,17 @@ module.exports = {
   content: ["./*.{html,js}"],
   theme: {
     extend: {
+      screens: {
+        tablet: "768px",
+        md: "900px",
+      },
       fontFamily: {
         body: "PlusJakartaSans",
       },
       colors: {
         limeBright: "#D8DB2F",
         limePale: "#F9FAE0",
+        limeButtonHover: "#EBED97",
         bluePale: "rgba(154, 190, 213, 25%)",
         errorRed: "#D73328",
         slate900: "#133041",
@@ -43,9 +48,19 @@ module.exports = {
         150: "0.75rem" /* 12px */,
         175: "0.78125rem" /* 12.5px */,
         200: "1rem" /* 16px */,
+        250: "1.140625rem" /* 18.25px */,
         300: "1.5rem" /* 24px */,
         400: "2rem" /* 32px */,
         500: "2.5rem" /* 40px */,
+      },
+      maxWidth: {
+        card: "63rem",
+      },
+      borderRadius: {
+        cardSection: "5rem",
+      },
+      boxShadow: {
+        resultsTop: "inset 0 4px #000",
       },
     },
   },

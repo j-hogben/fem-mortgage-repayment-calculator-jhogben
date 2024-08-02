@@ -17,22 +17,39 @@
 
     <title>Frontend Mentor | Mortgage repayment calculator</title>
   </head>
-  <body class="font-body">
+  <body
+    class="font-body tablet:bg-slate100 tablet:p-500 md:p-200 md:grid md:min-h-dvh md:place-items-center"
+  >
     <main>
       <!-- CARD -->
-      <div class="card">
+      <div
+        class="card max-w-card tablet:rounded-3xl tablet:overflow-hidden bg-white md:flex"
+      >
         <!-- FORM SIDE OF CARD -->
-        <section class="px-300 py-400 bg-white">
-          <form id="mortgage-calculator" action="">
-            <div class="flex justify-between">
-              <h1>Mortgage Calculator</h1>
-              <button type="reset">Clear All</button>
+        <section class="px-300 py-400 tablet:p-500 md:w-1/2">
+          <form
+            id="mortgage-calculator"
+            action=""
+            class="sm:gap-x-300 sm:grid sm:grid-cols-2"
+          >
+            <div
+              class="form-title sm:col-span-2 sm:flex sm:items-center sm:justify-between"
+            >
+              <h1 class="text-preset2/preset2 text-slate900 font-bold">
+                Mortgage Calculator
+              </h1>
+              <button
+                type="reset"
+                class="text-preset4/preset4 text-slate700 mt-100 underline sm:mt-0"
+              >
+                Clear All
+              </button>
             </div>
 
             <!-- FORM GROUP 1 - MORTGAGE AMOUNT -->
-            <div class="form-group">
+            <div class="form-group mt-300 tablet:mt-500 sm:col-span-2">
               <label for="mortgage-amount">Mortgage Amount</label>
-              <div class="input-container text-input-default flex">
+              <div class="input-container text-input-default mt-150 flex">
                 <p class="input-unit">£</p>
                 <input
                   required
@@ -42,13 +59,13 @@
                   class="format-input w-full"
                 />
               </div>
-              <div class="error"></div>
+              <div class="error hidden"></div>
             </div>
 
             <!-- FORM GROUP 2 - MORTGAGE TERM -->
-            <div class="form-group">
+            <div class="form-group mt-300 sm:col-span-1">
               <label for="mortgage-term">Mortgage Term</label>
-              <div class="input-container text-input-default flex">
+              <div class="input-container text-input-default mt-150 flex">
                 <input
                   required
                   type="text"
@@ -58,13 +75,13 @@
                 />
                 <p class="input-unit">years</p>
               </div>
-              <div class="error"></div>
+              <div class="error hidden"></div>
             </div>
 
             <!-- FORM GROUP 3 - INTEREST RATE -->
-            <div class="form-group">
+            <div class="form-group mt-300 sm:col-span-1">
               <label for="interest-rate">Interest Rate</label>
-              <div class="input-container text-input-default flex">
+              <div class="input-container text-input-default mt-150 flex">
                 <input
                   required
                   type="text"
@@ -74,41 +91,104 @@
                 />
                 <p class="input-unit">%</p>
               </div>
-              <div class="error"></div>
+              <div class="error hidden"></div>
             </div>
 
             <!-- FORM GROUP 4 - MORTGAGE TYPE -->
-            <div class="form-group radio-group">
+            <div class="form-group radio-group mt-300 sm:col-span-2">
               <p>Mortgage Type</p>
 
               <div class="input-container mortgage-type">
-                <label for="repayment" class="radio-input-default flex">
+                <label
+                  for="repayment"
+                  class="radio-input-default mt-150 gap-250 text-preset3 flex items-center"
+                >
                   <input
                     required
                     type="radio"
                     name="mortgage-type"
                     id="repayment"
                     value="repayment"
+                    class="sr-only"
                   />
+                  <svg
+                    width="19.5"
+                    height="19.5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="radio-unchecked"
+                  >
+                    <path
+                      d="M10 0.25C8.07164 0.25 6.18657 0.821828 4.58319 1.89317C2.97982 2.96451 1.73013 4.48726 0.992179 6.26884C0.254225 8.05042 0.061142 10.0108 0.437348 11.9021C0.813554 13.7934 1.74215 15.5307 3.10571 16.8943C4.46928 18.2579 6.20656 19.1865 8.09787 19.5627C9.98919 19.9389 11.9496 19.7458 13.7312 19.0078C15.5127 18.2699 17.0355 17.0202 18.1068 15.4168C19.1782 13.8134 19.75 11.9284 19.75 10C19.7473 7.41498 18.7192 4.93661 16.8913 3.10872C15.0634 1.28084 12.585 0.25273 10 0.25ZM10 18.25C8.36831 18.25 6.77326 17.7661 5.41655 16.8596C4.05984 15.9531 3.00242 14.6646 2.378 13.1571C1.75358 11.6496 1.5902 9.99085 1.90853 8.3905C2.22685 6.79016 3.01259 5.32015 4.16637 4.16637C5.32016 3.01259 6.79017 2.22685 8.39051 1.90852C9.99085 1.59019 11.6497 1.75357 13.1571 2.37799C14.6646 3.00242 15.9531 4.05984 16.8596 5.41655C17.7661 6.77325 18.25 8.3683 18.25 10C18.2475 12.1873 17.3775 14.2843 15.8309 15.8309C14.2843 17.3775 12.1873 18.2475 10 18.25Z"
+                      fill="#4E6E7E"
+                    />
+                  </svg>
+                  <svg
+                    width="19.5"
+                    height="19.5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="radio-checked"
+                  >
+                    <path
+                      d="M10 0.25C8.07164 0.25 6.18657 0.821828 4.58319 1.89317C2.97982 2.96451 1.73013 4.48726 0.992179 6.26884C0.254225 8.05042 0.061142 10.0108 0.437348 11.9021C0.813554 13.7934 1.74215 15.5307 3.10571 16.8943C4.46928 18.2579 6.20656 19.1865 8.09787 19.5627C9.98919 19.9389 11.9496 19.7458 13.7312 19.0078C15.5127 18.2699 17.0355 17.0202 18.1068 15.4168C19.1782 13.8134 19.75 11.9284 19.75 10C19.7473 7.41498 18.7192 4.93661 16.8913 3.10872C15.0634 1.28084 12.585 0.25273 10 0.25ZM10 18.25C8.36831 18.25 6.77326 17.7661 5.41655 16.8596C4.05984 15.9531 3.00242 14.6646 2.378 13.1571C1.75358 11.6496 1.5902 9.99085 1.90853 8.3905C2.22685 6.79016 3.01259 5.32015 4.16637 4.16637C5.32016 3.01259 6.79017 2.22685 8.39051 1.90852C9.99085 1.59019 11.6497 1.75357 13.1571 2.37799C14.6646 3.00242 15.9531 4.05984 16.8596 5.41655C17.7661 6.77325 18.25 8.3683 18.25 10C18.2475 12.1873 17.3775 14.2843 15.8309 15.8309C14.2843 17.3775 12.1873 18.2475 10 18.25ZM15.25 10C15.25 11.0384 14.9421 12.0534 14.3652 12.9167C13.7883 13.7801 12.9684 14.453 12.0091 14.8504C11.0498 15.2477 9.99418 15.3517 8.97578 15.1491C7.95738 14.9466 7.02192 14.4465 6.28769 13.7123C5.55347 12.9781 5.05345 12.0426 4.85088 11.0242C4.64831 10.0058 4.75228 8.95022 5.14964 7.99091C5.547 7.0316 6.2199 6.21166 7.08326 5.63478C7.94662 5.05791 8.96165 4.75 10 4.75C11.3919 4.75149 12.7264 5.30509 13.7107 6.28933C14.6949 7.27358 15.2485 8.60807 15.25 10Z"
+                      fill="#D8DB2F"
+                    />
+                  </svg>
                   <p>Repayment</p>
                 </label>
 
-                <label for="interest-only" class="radio-input-default flex">
+                <label
+                  for="interest-only"
+                  class="radio-input-default mt-150 gap-250 flex"
+                >
                   <input
                     required
                     type="radio"
                     name="mortgage-type"
                     id="interest-only"
                     value="interest-only"
+                    class="sr-only"
                   />
+                  <svg
+                    width="19.5"
+                    height="19.5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="radio-unchecked"
+                  >
+                    <path
+                      d="M10 0.25C8.07164 0.25 6.18657 0.821828 4.58319 1.89317C2.97982 2.96451 1.73013 4.48726 0.992179 6.26884C0.254225 8.05042 0.061142 10.0108 0.437348 11.9021C0.813554 13.7934 1.74215 15.5307 3.10571 16.8943C4.46928 18.2579 6.20656 19.1865 8.09787 19.5627C9.98919 19.9389 11.9496 19.7458 13.7312 19.0078C15.5127 18.2699 17.0355 17.0202 18.1068 15.4168C19.1782 13.8134 19.75 11.9284 19.75 10C19.7473 7.41498 18.7192 4.93661 16.8913 3.10872C15.0634 1.28084 12.585 0.25273 10 0.25ZM10 18.25C8.36831 18.25 6.77326 17.7661 5.41655 16.8596C4.05984 15.9531 3.00242 14.6646 2.378 13.1571C1.75358 11.6496 1.5902 9.99085 1.90853 8.3905C2.22685 6.79016 3.01259 5.32015 4.16637 4.16637C5.32016 3.01259 6.79017 2.22685 8.39051 1.90852C9.99085 1.59019 11.6497 1.75357 13.1571 2.37799C14.6646 3.00242 15.9531 4.05984 16.8596 5.41655C17.7661 6.77325 18.25 8.3683 18.25 10C18.2475 12.1873 17.3775 14.2843 15.8309 15.8309C14.2843 17.3775 12.1873 18.2475 10 18.25Z"
+                      fill="#4E6E7E"
+                    />
+                  </svg>
+                  <svg
+                    width="19.5"
+                    height="19.5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="radio-checked"
+                  >
+                    <path
+                      d="M10 0.25C8.07164 0.25 6.18657 0.821828 4.58319 1.89317C2.97982 2.96451 1.73013 4.48726 0.992179 6.26884C0.254225 8.05042 0.061142 10.0108 0.437348 11.9021C0.813554 13.7934 1.74215 15.5307 3.10571 16.8943C4.46928 18.2579 6.20656 19.1865 8.09787 19.5627C9.98919 19.9389 11.9496 19.7458 13.7312 19.0078C15.5127 18.2699 17.0355 17.0202 18.1068 15.4168C19.1782 13.8134 19.75 11.9284 19.75 10C19.7473 7.41498 18.7192 4.93661 16.8913 3.10872C15.0634 1.28084 12.585 0.25273 10 0.25ZM10 18.25C8.36831 18.25 6.77326 17.7661 5.41655 16.8596C4.05984 15.9531 3.00242 14.6646 2.378 13.1571C1.75358 11.6496 1.5902 9.99085 1.90853 8.3905C2.22685 6.79016 3.01259 5.32015 4.16637 4.16637C5.32016 3.01259 6.79017 2.22685 8.39051 1.90852C9.99085 1.59019 11.6497 1.75357 13.1571 2.37799C14.6646 3.00242 15.9531 4.05984 16.8596 5.41655C17.7661 6.77325 18.25 8.3683 18.25 10C18.2475 12.1873 17.3775 14.2843 15.8309 15.8309C14.2843 17.3775 12.1873 18.2475 10 18.25ZM15.25 10C15.25 11.0384 14.9421 12.0534 14.3652 12.9167C13.7883 13.7801 12.9684 14.453 12.0091 14.8504C11.0498 15.2477 9.99418 15.3517 8.97578 15.1491C7.95738 14.9466 7.02192 14.4465 6.28769 13.7123C5.55347 12.9781 5.05345 12.0426 4.85088 11.0242C4.64831 10.0058 4.75228 8.95022 5.14964 7.99091C5.547 7.0316 6.2199 6.21166 7.08326 5.63478C7.94662 5.05791 8.96165 4.75 10 4.75C11.3919 4.75149 12.7264 5.30509 13.7107 6.28933C14.6949 7.27358 15.2485 8.60807 15.25 10Z"
+                      fill="#D8DB2F"
+                    />
+                  </svg>
                   <p>Interest Only</p>
                 </label>
 
-                <div class="error"></div>
+                <div class="error hidden"></div>
               </div>
             </div>
 
-            <button type="submit" class="flex">
+            <button
+              type="submit"
+              class="mt-300 gap-150 bg-limeBright p-200 text-preset3/preset3 text-slate900 hover:bg-limeButtonHover focus:bg-limePale md:px-500 tablet:mt-500 flex w-full justify-center rounded-full font-bold sm:col-span-2 md:w-fit"
+            >
               <img src="./assets/images/icon-calculator.svg" alt="" />
               <p>Calculate Repayments</p>
             </button>
@@ -116,13 +196,17 @@
         </section>
 
         <!-- RESULTS SIDE OF CARD -->
-        <section class="px-300 py-400 bg-slate900 text-white">
+        <section
+          class="px-300 py-400 bg-slate900 md:rounded-bl-cardSection tablet:p-500 text-white md:flex md:w-1/2"
+        >
           <!-- EMPTY RESULTS -->
-          <div id="empty-results" class="">
-            <div>
+          <div id="empty-results" class="my-auto">
+            <div class="flex flex-col items-center text-center">
               <img src="./assets/images/illustration-empty.svg" alt="" />
-              <h2>Results shown here</h2>
-              <p>
+              <h2 class="text-preset2/preset2 mt-200 font-bold">
+                Results shown here
+              </h2>
+              <p class="text-preset4/preset4 text-slate300 mt-200">
                 Complete the form and click “calculate repayments” to see what
                 your monthly repayments would be.
               </p>
@@ -131,24 +215,26 @@
 
           <!-- COMPLETED RESULTS -->
           <div id="completed-results" class="hidden">
-            <h2>Your results</h2>
-            <p>
+            <h2 class="text-preset2/preset2 font-bold">Your results</h2>
+            <p class="mt-200 text-slate300">
               Your results are shown below based on the information you
               provided. To adjust the results, edit the form and click
               “calculate repayments” again.
             </p>
             <div
-              class="bg-overlay py-300 px-200 border-limeBright rounded-lg border-t-4"
+              class="bg-overlay py-300 px-200 shadow-resultsTop shadow-limeBright mt-300 tablet:mt-500 tablet:p-400 rounded-lg"
             >
               <div class="border-bluePale border-b">
-                <p>Your monthly repayments</p>
+                <p class="text-slate300">Your monthly repayments</p>
                 <p
                   id="monthly-repayments"
-                  class="mt-100 mb-200 text-preset1mob/preset1 text-limeBright font-bold"
+                  class="mt-100 mb-200 tablet:mb-400 text-preset1mob/preset1 text-limeBright tablet:text-preset1/preset1 font-bold"
                 ></p>
               </div>
               <div>
-                <p class="mt-200">Total you'll repay over the term</p>
+                <p class="mt-200 tablet:mt-400 text-slate300">
+                  Total you'll repay over the term
+                </p>
                 <p
                   id="total-repayment"
                   class="text-preset2/preset2 leading-preset2 mt-100 font-bold"

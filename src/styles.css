@@ -20,7 +20,12 @@
   }
 
   .input-unit {
-    @apply bg-slate100 py-175 px-200;
+    @apply bg-slate100 py-175 px-200 text-slate700;
+  }
+
+  .form-group > label,
+  .form-group > p {
+    @apply text-slate700;
   }
 
   /* FORM INPUT ACTIVE STATES */
@@ -48,9 +53,22 @@
     @apply bg-limePale border-limeBright;
   }
 
+  /* CUSTOM RADIO BUTTONS */
+  .radio-input-default:has(:not([type="radio"]:checked)) .radio-checked {
+    @apply hidden;
+  }
+
+  .radio-input-default:has(input[type="radio"]:checked) .radio-checked {
+    @apply block;
+  }
+
+  .radio-input-default:has(input[type="radio"]:checked) .radio-unchecked {
+    @apply hidden;
+  }
+
   /* FORM ERROR STATES */
   .error {
-    @apply text-errorRed;
+    @apply text-errorRed mt-150;
   }
 
   .text-input-default-error {
@@ -58,7 +76,7 @@
   }
 
   .input-unit-error {
-    @apply bg-errorRed text-white;
+    @apply !bg-errorRed !text-white;
   }
 
   /* FORM INPUT BYPASS AUTOCOMPLETE DEFAULT STYLING */

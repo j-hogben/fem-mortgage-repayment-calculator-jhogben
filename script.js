@@ -5,6 +5,22 @@ const calculatorForm = document.querySelector("#mortgage-calculator");
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ HIDE RESULTS SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+const hideResults = () => {
+  const emptyResults = document.querySelector("#empty-results");
+  const completedResults = document.querySelector("#completed-results");
+
+  if (emptyResults.classList.contains("hidden")) {
+    emptyResults.classList.remove("hidden");
+  }
+  if (!completedResults.classList.contains("hidden")) {
+    completedResults.classList.add("hidden");
+  }
+};
+
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ SHOW RESULTS SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 const showResults = () => {
   const emptyResults = document.querySelector("#empty-results");
@@ -223,6 +239,7 @@ const validateForm = (formSelector) => {
     for (const option of validationOptions) {
       if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
         errorContainer.textContent = option.errorMessage;
+        errorContainer.classList.remove("hidden");
         formGroupError = true;
         if (input.type !== "radio" && input.type !== "checkbox") {
           inputContainer.classList.add("text-input-default-error");
@@ -234,6 +251,7 @@ const validateForm = (formSelector) => {
 
     if (!formGroupError) {
       errorContainer.textContent = "";
+      errorContainer.classList.add("hidden");
       if (input.type !== "radio" && input.type !== "checkbox") {
         inputContainer.classList.remove("text-input-default-error");
         inputUnit.classList.remove("input-unit-error");
@@ -268,5 +286,7 @@ calculatorForm.addEventListener("submit", (event) => {
   if (validateForm(calculatorForm)) {
     calculateMortgage();
     showResults();
+  } else {
+    hideResults();
   }
 });
