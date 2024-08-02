@@ -5,6 +5,18 @@ const calculatorForm = document.querySelector("#mortgage-calculator");
 // //////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////
 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ SHOW RESULTS SECTION ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+const showResults = () => {
+  const emptyResults = document.querySelector("#empty-results");
+  const completedResults = document.querySelector("#completed-results");
+
+  emptyResults.classList.add("hidden");
+  completedResults.classList.remove("hidden");
+};
+
+// //////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ MORTGAGE CALCULATOR FUNCTION ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 const calculateMortgage = () => {
@@ -144,8 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     number.addEventListener("blur", (event) => {
       let input = event.target;
       let value = input.value;
-
-      if (value) {
+      console.log(value);
+      console.log(typeof value);
+      if (value && !value.includes(",")) {
         let numValue = parseFloat(value);
         if (!isNaN(numValue)) {
           if (!Number.isInteger(numValue)) {
@@ -157,10 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
             value = numValue.toLocaleString();
           }
         }
-      } else {
+      } else if (!value.includes(",")) {
+        console.log(value);
         value = "";
       }
-
       input.value = value;
     });
   });
@@ -254,5 +267,6 @@ calculatorForm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (validateForm(calculatorForm)) {
     calculateMortgage();
+    showResults();
   }
 });
